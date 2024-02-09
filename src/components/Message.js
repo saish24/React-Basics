@@ -10,32 +10,27 @@ class Message extends Component {
     };
   }
 
-  OnClickSubscribe() {
+  OnClickSubscribe = () => {
     this.setState((prevState, props) => {
-      var message = "Welcome to this website!";
-      var subscribeMessage = "Click to subscribe";
+      const newState = Object.assign({}, prevState);
+
+      newState.message = "Welcome to this website!";
+      newState.subscribeMessage = "Click to subscribe";
 
       if (prevState.subscribed === true) {
-        message = "Thank you for subscribing!";
-        subscribeMessage = "Subscribed ✅";
+        newState.message = "Thank you for subscribing!";
+        newState.subscribeMessage = "Subscribed ✅";
       }
-      return {
-        subscribed: !prevState.subscribed,
-        message: message,
-        subscribeMessage: subscribeMessage,
-      };
+      newState.subscribed = !newState.subscribed;
+      return newState;
     });
-  }
+  };
 
   render() {
     return (
       <div>
         <h1>{this.state.message}</h1>
-        <button
-          onClick={() => {
-            this.OnClickSubscribe();
-          }}
-        >
+        <button onClick={this.OnClickSubscribe}>
           {this.state.subscribeMessage}
         </button>
       </div>
